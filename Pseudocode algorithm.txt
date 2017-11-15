@@ -1,0 +1,35 @@
+Basic Algorithm
+
+Step 1. Break timeseries sorted by timestamp into segments of size N (N = 5, can be variable)
+For SUPPORT array:
+Step 2. Identify minimum values of each segment, you will have an array of minimum values from all segments = :arrayOfMin
+Step 3. Find minimum of (:arrayOfMin) = :minValue
+Step 4. See if any of the remaining values fall within range (X% of :minValue) (X = 1.2%, can be variable). If yes add level to the separate array (:supportArrTemp) & remove these values from :arrayOfMin
+Step 5. Add mean(:supportArrTemp) and weigth = (:supportArrTemp).size to the support level array (:supportArr)
+Step 6. Repeat steps 2 to 5 until :arrayOfMin is empty
+Step 7. Now smoothen these values, if any support levels are too close then eliminate one of them. Removes one of the adjacent levels which are close to each other. 
+If difference between levels < (X = 1.2%) DO 
+BEGIN
+	(:levelValue1) = min value of ((:levelValue1), (:levelValue2)); 
+	(:weigthOfLevel1) = (:weigthOfLevel1) + (:weigthOfLevel2);
+	remove level2 from (:supportArr)
+END
+Compare level1 and level3
+
+For RESISTANCE array:
+Step 8. Identify maximum values of each segment, you will have an array of maximum values from all segments = :arrayOfMax
+Step 9. Find maximum of (:arrayOfMax) = :maxValue
+Step 10. See if any of the remaining values fall within range (X% of :maxValue) (X = 1.2%, can be variable). If yes add level to the separate array (:resistanceArrTemp) & remove these values from :arrayOfMax
+Step 11. Add mean(:resistanceArrTemp) and weigth = (:resistanceArrTemp).size to the resistance level array (:resistanceArr)
+Step 12. Repeat steps 2 to 5 until :arrayOfMax is empty
+Step 13. Removes one of the adjacent levels which are close to each other. 
+If difference between levels < (X = 1.2%) DO 
+BEGIN
+	(:levelValue1) = max value of ((:levelValue1), (:levelValue2)); 
+	(:weigthOfLevel1) = (:weigthOfLevel1) + (:weigthOfLevel2);
+	remove level2 from (:resistanceArr)
+END
+Compare level1 and level3
+
+14. Combine (:supportArr) and (:resistanceArr) to the (:levelArr)
+15. Remove weak levels. If (:weigthOfLevel) < (A = 2, can be variable) DO remove level from (:levelArr)

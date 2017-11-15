@@ -1,0 +1,11 @@
+
+\.project
+
+\.settings/org\.eclipse\.jdt\.core\.prefs
+
+\.classpath
+
+\.settings/org\.eclipse\.m2e\.core\.prefs
+
+target/
+
